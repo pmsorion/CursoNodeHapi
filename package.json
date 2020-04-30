@@ -1,0 +1,11 @@
+{
+  "name": "cursonodeconhapi",
+  "version": "1.0.0",
+  "description": "Un sitio como StackOverFlow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Francisco Garcia",
+  "license": "MIT"
+}

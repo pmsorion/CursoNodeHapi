@@ -1,12 +1,12 @@
 'use strict'
 
-const Hapi = require('hapi');
-const handlebars = require('handlebars');
-const config = require('./config');
-const inert = require('inert');
-const path = require('path');
-const routes = require('./routes');
-const vision = require('vision');
+const Hapi = require('hapi')
+const handlebars = require('handlebars')
+const config = require('./config')
+const inert = require('inert')
+const path = require('path')
+const routes = require('./routes')
+const vision = require('vision')
 
 const server = Hapi.server({
   port: config.port,
@@ -16,12 +16,12 @@ const server = Hapi.server({
       relativeTo: path.join(__dirname, 'public')
     }
   }
-});
+})
 
 async function init () {
   try {
-    await server.register(inert);
-    await server.register(vision);
+    await server.register(inert)
+    await server.register(vision)
 
     server.views({
       engines: {
@@ -35,13 +35,13 @@ async function init () {
 
     server.route(routes)
 
-    await server.start();
+    await server.start()
   } catch (error) {
-    console.error(error);
-    process.exit(1);
+    console.error(error)
+    process.exit(1)
   }
 
-  console.log(`Servidor lanzado en: http://${config.host}:${config.port}`);
+  console.log(`Servidor lanzado en: ${server.info.uri}`)
 }
 
-init();
+init()

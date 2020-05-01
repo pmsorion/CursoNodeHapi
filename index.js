@@ -5,11 +5,12 @@ const handlebars = require('handlebars');
 const config = require('./config');
 const inert = require('inert');
 const path = require('path');
+const routes = require('./routes');
 const vision = require('vision');
 
 const server = Hapi.server({
   port: config.port,
-  host: config.host.process,
+  host: config.host,
   routes: {
     files: {
       relativeTo: path.join(__dirname, 'public')
@@ -18,8 +19,6 @@ const server = Hapi.server({
 });
 
 async function init () {
-
-
   try {
     await server.register(inert);
     await server.register(vision);
@@ -34,36 +33,7 @@ async function init () {
       layoutPath: 'views'
     })
 
-    server.route({
-      method: 'GET',
-      path: '/',
-      handler: (req, h) => {
-        return h.view('index', {
-          title: 'home',
-        });
-      }
-    });
-
-    server.route({
-      method: 'GET',
-      path: '/register',
-      handler: (req, h) => {
-        return h.view('register', {
-          title: 'Registro',
-        });
-      }
-    });
-  
-    server.route({
-      method: 'GET',
-      path: '/{param*}',
-      handler: {
-        directory: {
-          path: '.',
-          index: ['index.html']
-        }
-      }
-    });
+    server.route(routes)
 
     await server.start();
   } catch (error) {

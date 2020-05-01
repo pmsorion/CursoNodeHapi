@@ -4,4 +4,4 @@ const config = {
     publicRoute: process.env.PUBLIC_ROUTE || 'app',
 }
 
-module.exports = config;
+module.exports = config

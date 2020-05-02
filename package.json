@@ -12,6 +12,8 @@
   "author": "Francisco Garcia",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^4.0.1",
+    "firebase-admin": "^8.11.0",
     "handlebars": "^4.7.6",
     "hapi": "^18.1.0",
     "inert": "^5.1.3",

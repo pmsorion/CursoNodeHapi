@@ -20,7 +20,18 @@ async function createUser (req, h) {
     return h.response(`Usuario creado ID: ${result}`)
 }
 
+async function validateUser (req, h) {
+    try {
+        const userLogin = await user.validateUser(req.payload)
+        return userLogin
+    } catch (error) {
+        console.error(error)
+        return h.response('Problemas validando el usuario').code(500)
+    }
+}
+
 module.exports = {
     register: register,
+    validateUser: validateUser,
     createUser: createUser
 }

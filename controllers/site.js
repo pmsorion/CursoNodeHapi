@@ -30,10 +30,19 @@ function register (req, h) {
   function notFound(req, h) {
     return h.view('404', {}, {layout: 'error-layout'}).code(404)
   }
+
+  function fileNotFound(req, h) {
+    const response = req.response
+    if (response.isBoom && response.output.statusCode === 404) {
+      return h.view('404', {}, {layout: 'error-layout'}).code(404)
+    }
+    return h.continue
+  }
   
 module.exports = {
     home: home,
     login: login,
     notFound: notFound,
+    fileNotFound: fileNotFound,
     register: register
 }

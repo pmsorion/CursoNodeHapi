@@ -10,11 +10,18 @@ function register (req, h) {
 async function createUser (req, h) {
     try {
         const createUserId = await user.create(req.payload)
-        return h.response(`Usuario creado ID: ${createUserId}`).code(201)
-        //result = await users.create(req.payload)
+        //return h.response(`Usuario creado ID: ${createUserId}`).code(201)
+        return h.view('register', {
+            title: 'Registro',
+            success: 'Usuario creado exitosamente'
+        })
     } catch (error) {
         console.error(error)
-        return h.response('Problemas creado el usuario').code(500)
+        return h.view('register', {
+            title: 'Registro',
+            error: 'Error creando el usuario'
+        })
+        //return h.response('Problemas creado el usuario').code(500)
     }
 }
 
@@ -27,7 +34,11 @@ async function validateUser (req, h) {
     try {
         const userLogin = await user.validateUser(req.payload)
         if (!userLogin) {
-            return h.response('Email y/o contraseña incorrecta').code(401)
+            //return h.response('Email y/o contraseña incorrecta').code(401)
+            return h.view('login', {
+                title: 'Login',
+                error: 'Email y/o contraseña incorrecta'
+            })
         }
         return h.redirect('/').code(200).state('user' ,{
             name: userLogin.name,
@@ -35,7 +46,11 @@ async function validateUser (req, h) {
         })
     } catch (error) {
         console.error(error)
-        return h.response('Problemas validando el usuario').code(500)
+        //return h.response('Problemas validando el usuario').code(500)
+        return h.view('login', {
+            title: 'Login',
+            error: 'Problemas validando el usuario'
+        })
     }
 }
 

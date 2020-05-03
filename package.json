@@ -13,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^4.0.1",
+    "boom": "^7.3.0",
     "firebase-admin": "^8.11.0",
     "handlebars": "^4.7.6",
     "hapi": "^18.1.0",

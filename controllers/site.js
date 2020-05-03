@@ -2,18 +2,29 @@
 
 function home(req, h) {
     return h.view('index', {
-        title: 'home'
+        title: 'Home',
+        user: req.state.user 
     })
 }
 
 function register (req, h) {
+  if (req.state.user) {
+    return h.redirect('/')
+  }
     return h.view('register', {
-      title: 'Registro'
+      title: 'Registro',
+      user: req.state.user
     })
   }
 
   function login (req, h) {
-    return h.view('login', { title: 'Login' })
+    if (req.state.user) {
+      return h.redirect('/')
+    }
+    return h.view('login', { 
+      title: 'Ingrese' ,
+      user: req.state.user
+    })
   }
   
 module.exports = {

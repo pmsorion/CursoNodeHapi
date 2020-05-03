@@ -38,6 +38,11 @@ module.exports = [
     },
     {
         method: 'GET',
+        path: '/question/{id}',
+        handler: site.viewQuestion
+    },
+    {
+        method: 'GET',
         path: '/logout',
         handler: user.logout
     },

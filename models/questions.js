@@ -23,6 +23,12 @@ class Quiestions {
         const data = query.val()
         return data
     }
+
+    async getOne (id) {
+        const query = await this.collection.child(id).once('value')
+        const data = query.val()
+        return data
+    }
 }
 
 module.exports = Quiestions

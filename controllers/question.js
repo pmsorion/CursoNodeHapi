@@ -19,4 +19,6 @@ async function createQuestion(req, h) {
     }
 }
 
-module.exports = {createQuestion: createQuestion}
+module.exports = {
+    createQuestion: createQuestion
+}

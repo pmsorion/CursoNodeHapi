@@ -8,14 +8,15 @@ class Quiestions {
     }
 
     async create (data, user) {
-        data.owner = user
+        const ask = {
+            ...data
+        }
+        ask.owner = user
         const question = this.collection.push()
-        question.set(data)
+        question.set(ask)
 
         return question.key
     }
-
 }
-
 
 module.exports = Quiestions

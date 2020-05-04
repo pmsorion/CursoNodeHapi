@@ -1,6 +1,6 @@
 'use strict'
 
-class Quiestions {
+class Questions {
     constructor(db) {
         this.db = db
         this.ref = this.db.ref('/')
@@ -40,7 +40,7 @@ class Quiestions {
     }
 
     async setAnswerRight (questionId, answerId, user) {
-        const query = await this.collection.child('questionId').once('value')
+        const query = await this.collection.child(questionId).once('value')
         const question = query.val()
         const answers = question.answers
 
@@ -49,12 +49,12 @@ class Quiestions {
         }
 
         for (let key in answers) {
-            answes[key].correct = (key === answerId)
+            answers[key].correct = (key === answerId)
         }
 
-        const update = await this.collection.child(questionId).child('answers').update(answes)
+        const update = await this.collection.child(questionId).child('answers').update(answers)
         return update
     }
 }
 
-module.exports = Quiestions
+module.exports = Questions

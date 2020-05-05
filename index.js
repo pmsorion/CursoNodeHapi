@@ -10,6 +10,8 @@ const path = require('path')
 const routes = require('./routes')
 const site = require('./controllers/site')
 const vision = require('vision')
+const crumb = require('crumb')
+
 
 const server = Hapi.server({
   port: config.port,
@@ -35,6 +37,15 @@ async function init () {
             },
             'stdout'
           ]
+        }
+      }
+    })
+
+    await server.register({
+      plugin: crumb,
+      options: {
+        cookieOptions: {
+          isSecure: process.env.NODE_ENV === 'prod'
         }
       }
     })

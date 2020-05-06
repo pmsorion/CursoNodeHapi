@@ -3,6 +3,7 @@
 const Hapi = require('hapi')
 const blankie = require('blankie')
 const crumb = require('crumb')
+const hapiDevErrors = require('hapi-dev-errors')
 const handlebars = require('./lib/helpers')
 const config = require('./config')
 const inert = require('inert')
@@ -62,6 +63,13 @@ async function init () {
         }
       } 
     }) */
+
+    await server.register({
+      plugin: hapiDevErrors,
+      options: {
+        showErrors: process.env.NODE_ENV !== 'prod'
+      }
+    })
 
     
 
